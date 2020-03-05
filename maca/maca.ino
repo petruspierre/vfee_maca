@@ -1,47 +1,24 @@
 #include <Ultrasonic.h>
 
-#define in1 16
-#define in2 5
-#define in3 4
-#define in4 0
+short pin_motors[4] = { 16, 5, 4, 0 };
 
-#define pino_echo 14
-#define pino_trigger 12
+#define pin_echo 14
+#define pin_trigger 12
 
-Ultrasonic ultrasonic(pino_trigger, pino_echo); 
+Ultrasonic ultrasonic(pin_trigger, pin_echo); 
 
 void setup() {
+  
   Serial.begin(9600);
-
-  pinMode(in1, OUTPUT);
-  pinMode(in2, OUTPUT);
-  pinMode(in3, OUTPUT);
-  pinMode(in4, OUTPUT);
-
+  set_pinmodes();
+  
 }
 
 void loop() {
-  float timing = ultrasonic.read();
+  
   Serial.println("Testing...");
-  Serial.println(timing);
+  Serial.println(read_ultrassonic());
  
   delay(100);
 
-}
-
-
-void foward(){
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, LOW);
-
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, LOW);  
-}
-
-void stop_motors(){
-  digitalWrite(in1, HIGH);
-  digitalWrite(in2, HIGH);
-
-  digitalWrite(in3, HIGH);
-  digitalWrite(in4, HIGH);  
 }
